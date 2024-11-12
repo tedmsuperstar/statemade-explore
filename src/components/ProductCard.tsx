@@ -16,6 +16,7 @@ function ProductCard(props: any): JSX.Element {
                 <article>
                     <div >
                         <img  
+                        loading="lazy"
                         alt={name}
                         srcSet={srcSet}
                         src={image1x}/>
