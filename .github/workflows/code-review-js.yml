@@ -55,7 +55,7 @@ jobs:
         OPEN_AI_AZURE_KEY: ${{ secrets.OPEN_AI_AZURE_KEY }}
         OPEN_AI_AZURE_DEPLOYMENT_ID: ${{ secrets.OPEN_AI_AZURE_DEPLOYMENT_ID }}
       run: |
-        git fetch origin develop  # or main, depending on your default branch
-        git diff origin/develop...HEAD | node dist/code-reviewer.js
+        git fetch origin main  # or main, depending on your default branch
+        git diff origin/main...HEAD | node dist/code-reviewer.js
       working-directory: ./github-workflows # Ensure this is where your tsconfig.json is located
 
