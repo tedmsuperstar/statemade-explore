@@ -26,7 +26,7 @@ function delay(ms: number): Promise<void> {
 
 // Function to rate-limit calls
 async function rateLimitedFetch(inputArray: string[], limit: number, delayTime: number): Promise<string> {
-  let response2 = "";
+  let response = "";
   const queue: Promise<void>[] = [];
 
   // Helper function to process a single chunk
@@ -41,7 +41,7 @@ async function rateLimitedFetch(inputArray: string[], limit: number, delayTime: 
 
       for await (const event of eventsForDiff) {
         for (const choice of event.choices) {
-          response2 += choice.delta?.content ?? "";
+          response += choice.delta?.content ?? "";
         }
       }
     } catch (err) {
@@ -67,7 +67,7 @@ async function rateLimitedFetch(inputArray: string[], limit: number, delayTime: 
   // Wait for all remaining promises to complete
   await Promise.all(queue);
 
-  return response2;
+  return response;
 }
 
 async function commentOnPR(body: string): Promise<void> {
@@ -144,9 +144,9 @@ async function main(): Promise<void> {
     }
 
     rateLimitedFetch(inputArray, 2, 1000)
-      .then(response2 => {
-        console.log("responses", response2);
-        return commentOnPR(response2);
+      .then(response => {
+        console.log("responses", response);
+        return commentOnPR(response);
       })
       .catch(err => {
         console.error("An error occurred while processing the promises:", err);
