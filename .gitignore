@@ -1,5 +1,8 @@
 .DS_Store
 
+# generated file
+index.html
+
 # Logs
 logs
 *.log
